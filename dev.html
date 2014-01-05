@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Me Administrator</title>
+    <link href="http://admin.zsupport.me:8081/themes/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+    <link href="http://admin.zsupport.me:8081/themes/pick-a-color-1.1.4.min.css" rel="stylesheet"/>
+    <link href="http://admin.zsupport.me:8081/themes/custom.css" rel="stylesheet" />
+    <link href="http://admin.zsupport.me:8081/Scripts/Plugins/loading/css/showLoading.css" rel="stylesheet" />
+    <link href="http://admin.zsupport.me:8081/Scripts/Plugins/antiscroll/antiscroll.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
+    <style>
+      body {
+        padding-top: 20px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="http://admin.zsupport.me:8081/themes/bootstrap/css/bootstrap-responsive.css" rel="stylesheet"/>    
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>          
+    <script type="text/x-handlebars">
+        <div class="navbar navbar-inverse">
+          <div class="navbar-inner navbar-fixed-top">
+            <div class="topmenu">
+              <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </a>
+              {{#linkTo "Main"}} <span class="brand">ZSupport</span>{{/linkTo}}
+              <div class="nav-collapse collapse">
+                <div id="topnavmenu">
+                    <ul class="nav">
+                        {{#if isDashboard}}
+                            <li class="active">{{#linkTo Dashboard}}{{language.labelDashboard}}{{/linkTo}}</li>
+                        {{else}}
+                            <li>{{#linkTo Dashboard}}{{language.labelDashboard}}{{/linkTo}}</li>
+                        {{/if}}
+                        {{#if controller.isSupport}}
+                            <li class="active">{{#linkTo Operator/Home}}{{language.labelSupportOperator}}{{/linkTo}}
+
+                            </li>
+                        {{else}}
+                            <li>{{#linkTo Operator/Home}}{{language.labelSupportOperator}}<sup class="badge badge-important" style="margin-left:3px;">{{controller.totalTickets}}</sup>{{/linkTo}}</li>
+                        {{/if}}
+                        {{#if isCustomize}}                            
+                            <li class="active">{{#linkTo Customize}}{{language.labelCustomize}}{{/linkTo}}</li>
+                        {{else}}
+                            <li>{{#linkTo Customize}}{{language.labelCustomize}}{{/linkTo}}</li>
+                        {{/if}}                        
+                        {{#if isReport}}
+                            <li class="active"><a href="#" {{action "onReport"}}>{{language.labelReport}}</a></li>
+                        {{else}}
+                            <li><a href="#" {{action "onReport"}}>{{language.labelReport}}</a></li>
+                        {{/if}}
+                        <li class="dropdown">
+                            <a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown" {{action "onTracker"}}>{{language.labelTracker}} <b class="caret"></b></a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                            <li><a tabindex="-1" href="#" {{action "onSupporter"}}>{{language.labelReportSupporter}}</a></li>
+                            <li><a tabindex="-1" href="#" {{action "onReportOparator"}}>{{language.labelReportOperator}}</a></li>                    
+                            </ul>
+                        </li>
+                        </ul>
+                </div>
+                  <div>
+                    <ul class="nav pull-right">
+                        <li class="divider-vertical"></li>                                        
+                        <li><img src="/themes/bootstrap/img/avatar.jpg" class="user-avatar" /></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sang Cu<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                              <li>{{#linkTo Setting}}Account Setting{{/linkTo}}</li>
+                              <li><a href="#/Logout" {{action "view.onLogout"}}>Log Out</a></li>
+                                <li class="divider"></li>
+                              <li><a href="#/help">Help</a></li>
+                            </ul>
+                        </li>       
+                    </ul>
+                </div>
+                <form class="navbar-search pull-right">
+                    <input type="text" class="search-query" placeholder="Search">
+                </form>            
+              </div>
+            </div>
+          </div>
+        </div>
+    <div>
+        <div id="main-container">
+            <div class="container-fluid">
+              {{outlet}}
+            </div>
+        </div>
+    </div>
+    <div class="taskbar">
+        <div class="container">
+            Copyright<span class="cpright">©</span> 2012 zsupport.me
+        </div>
+    </div>
+    {{outlet login}}
+    </script>
+
+    <script src="http://admin.zsupport.me:8081/Scripts/Plugins/jquery-1.8.1.min.js"></script> 
+    <script src="http://admin.zsupport.me:8081/Scripts/Plugins/jquery.validate.min.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Plugins/jquery.cookie.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Plugins/moment.js"></script>
+    <!--Plugins-->
+    <!--<script src="http://admin.zsupport.me:8081/Scripts/Plugins/bootstrap.min.js"></script>-->
+    <script src="http://admin.zsupport.me:8081/themes/bootstrap/js/bootstrap.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Plugins/easyXDM.min.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Plugins/socketio/socket.io.js"></script>
+    <!--<script src="http://admin.zsupport.me:8081/https://raw.github.com/wycats/handlebars.js/master/dist/handlebars.js"></script>-->
+    <script src="http://admin.zsupport.me:8081/Scripts/Plugins/handlebars.js"></script>
+    <!--<script src="http://admin.zsupport.me:8081/Scripts/Plugins/ember-1.0.0-rc.js"></script>    -->
+    <script src="http://admin.zsupport.me:8081/Scripts/Plugins/ember.js"></script>    
+    
+    <script src="http://admin.zsupport.me:8081/Scripts/Plugins/jquery-1.8.1.min.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Plugins/jquery-ui-1.8.23.custom.min.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Plugins/jquery.cookie.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Plugins/jquery.dateFormat-1.0.js"></script>
+    
+    <script src="http://admin.zsupport.me:8081/Scripts/Plugins/tinycolor-0.9.14.min.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Plugins/pick-a-color-1.1.4.min.js"></script>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+    
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
+      </script>
+
+    <script src="http://admin.zsupport.me:8081/Scripts/Plugins/jquery.showLoading.min.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Plugins/jquery.validate.min.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/InitialApp.js"></script>
+    <!--Helpers-->
+    <script src="http://admin.zsupport.me:8081/Scripts/Helpers/AppConstants.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Helpers/Common.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Services/ApplicationServices.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Services/OperatorServices.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Services/RealTimeServices.js"></script>
+    <!--Models-->
+    <script src="http://admin.zsupport.me:8081/Scripts/Models/Languages/vn/ChatBoxLanguageModel.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Models/Languages/vn/LoginLanguageModel.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Models/Languages/vn/NavLanguageModel.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Models/Languages/vn/NavMenuOperatorLanguageModel.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Models/Languages/vn/OperatorLanguageModel.js"></script>    
+    <!--Controller-->
+    <script src="http://admin.zsupport.me:8081/Scripts/Controllers/OperatorBoardController.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Controllers/DashboardController.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Controllers/ChatBoxController.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Controllers/ChatBoxManagerController.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Controllers/CustomizeController.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Controllers/LoginController.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Controllers/MainController.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Controllers/MessageBoxController.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Controllers/OperatorController.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Controllers/OperatorInProcessController.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Controllers/OperatorQueueController.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Controllers/StartupController.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Controllers/OperatorBoardController.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Controllers/SettingController.js"></script>
+    <!--Views-->
+    <script src="http://admin.zsupport.me:8081/Scripts/Views/OperatorBoardView.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Views/DashboardView.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Views/CustomizeView.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Views/LoginView.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Views/OperatorView.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Views/MainView.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Views/MessageBoxView.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Views/OperatorInProcessView.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Views/OperatorQueueView.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Views/OperatorBoardView.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Views/SettingView.js"></script>
+    <!--Routers-->
+    <script src="http://admin.zsupport.me:8081/Scripts/Routes/CustomizeRoute.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Routes/DashboardRoute.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Routes/LoginRoute.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Routes/MainRoute.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Routes/OperatorRoute.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Routes/ReportRoute.js"></script>
+    <script src="http://admin.zsupport.me:8081/Scripts/Routes/TrackerRoute.js"></script>
+
+    <script src="http://admin.zsupport.me:8081/Scripts/Helpers/Support.Me.Helper.js"></script>    
+    <script src="http://admin.zsupport.me:8081/Scripts/entry.js"></script>
+</body>
+</html>

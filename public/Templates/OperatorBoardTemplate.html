@@ -1,0 +1,47 @@
+﻿<div class="well board">
+    <ul class="breadcrumb">
+      <li><a href="#" {{action onMarkCompleted this}}>Mark Completed</a> <span class="divider">|</span></li>
+      <li><a href="#">More Info</a> <span class="divider">|</span></li>      
+      <li><a target="_blank" href="http://zsupport.me/GraphicsCard/NVIDIA/GT6200/">Guest is surfing on: <b>NVIDIA GT6200</b> </a></li>      
+        
+    </ul>
+<ul class="chat-content">
+    {{#each item in controller.ticket.Messages}}
+        {{#if item.isGuest}}
+            <li class="guest">
+                <span>#{{item.ticket}}</span>
+                <ul>
+                    {{#each msg in item.Messages}}
+                        <li>{{msg.Content}}</li>
+                    {{/each}}
+                </ul>
+            </li>
+        {{else}}
+            <li class="owner">
+                <span>#{{item.ticket}}</span>
+                <ul>
+                    {{#each msg in item.Messages}}
+                        <li>{{msg.Content}}</li>
+                    {{/each}}
+                </ul>
+            </li>
+        {{/if}}    
+    {{/each}}
+    <li>
+        <br />
+        <div class="input-append">
+            {{view Em.TextField action="onSentMessage" valueBinding="controller.chatLineMessage" class="span4" type="text"}}
+            <button {{action onSentMessage this}} class="btn" type="button">Sent</button>
+             <div class="btn-group">
+                <button class="btn dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#" {{action onBlockTicket this}}>Block User</a></li>
+                </ul>
+            </div>
+        </div>
+        </div>
+    </li>
+</ul>
+</div>

@@ -1,0 +1,42 @@
+﻿<div id="ticketQueue" class="modal" data-backdrop="static">
+  <div class="modal-header">
+    {{#linkTo Operator/Home}}<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>{{/linkTo}}
+    <h3>{{controller.language.labelDialogTitle}}</h3>
+  </div>
+  <div class="modal-body"> 
+      {{#if controller.errorMessage}}
+      <p>
+        <div class="alert alert-error">
+            {{controller.errorMessage}}  
+        </div>
+      </p>   
+      {{/if}}
+    <p>
+        {{#if controller.isEmpty}}
+            {{controller.language.labelInforContent}}
+        {{else}}
+        <table class="table table-hover">
+        <thead>
+            <tr>                
+                <th>Ticket#ID</th>
+                <th>{{controller.language.labelTime}}</th>
+                <th></th>
+            </tr>
+        </thead>
+          <tbody>
+              {{#each controller.tickets}}
+                <tr>
+                  <td>{{unbound this.ticket}}</td>
+                  <td>{{fromNow this.timestamp}}</td>
+                  <td>{{unbound this.Message.Content}}<button class="btn btn-link pull-right" type="button" {{action onPickItem this}}>{{controller.language.labelSelect}}</button></td>
+                </tr>
+              {{/each}}                
+              </tbody>
+        </table>
+        {{/if}}
+    </p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-success" {{action onHideDialog}}>{{controller.language.labelCloseButton}}</a>    
+  </div>
+</div>

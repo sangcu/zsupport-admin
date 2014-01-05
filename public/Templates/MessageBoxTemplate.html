@@ -1,0 +1,18 @@
+﻿<div id="msgBoxId" data-backdrop="static" class="modal fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>{{labelTitle}}</h3>
+  </div>
+  <div class="modal-body">
+    <p>{{message}}</p>
+  </div>
+  <div class="modal-footer">
+      {{#each buttons}}
+        {{#if isPrimary}}
+            <a href="#" {{action onClick this}} class="btn btn-{{unbound class}}">{{caption}}</a>
+        {{else}}
+            <a href="#" {{action onClick this}} class="btn">{{caption}}</a>
+        {{/if}}
+      {{/each}}
+  </div>
+</div>

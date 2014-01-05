@@ -1,0 +1,59 @@
+﻿<div id="ticketInProcess" class="modal" data-backdrop="static">
+  <div class="modal-header">
+    {{#linkTo Operator/Home}}<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>{{/linkTo}}
+    <h3>{{controller.language.labelDialogTitle}}</h3>
+  </div>
+  <div class="modal-body"> 
+      {{#if controller.errorMessage}}
+      <p>
+        <div class="alert alert-error">
+            {{controller.errorMessage}}  
+        </div>
+      </p>   
+      {{/if}}
+        <div class="tabbable tabs-left">
+            <ul class="nav nav-list">
+            {{#each element in controller.ticketsInProcess}}
+                <li><a href="#{{unbound element.TicketID}}" {{action onTicketShow element}} data-toggle="tab">#{{element.TicketID}}</a>
+                    {{timedisplay element.StartTime}}
+                </li>
+            {{/each}}
+            </ul>
+            <div class="tab-content">
+                {{#if controller.selectedTicket}}
+                    <div class="btn-group">
+                      <a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
+                        {{controller.language.labelAction}}
+                        <span class="caret"></span>
+                      </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" {{action onCloseTicket}}>{{controller.language.labelMenuClose}}</a></li>
+                            <li><a href="#" {{action onOpenTicket}}>{{controller.language.labelMenuOpen}}</a></li>                                                        
+                        </ul>
+                    </div>
+                
+                    <ul class="message-content chat-content">
+                    {{#each element in controller.listSelectMessages}}
+                        {{#if element.isSupport}}
+                            <li class="supportmsg"><span>Me</span>
+                                {{#each element.Messages}}
+                                    {{this}}<br />
+                                {{/each}}
+                            </li>
+                        {{else}}
+                            <li class="usermsg"><span>#{{element.TicketID}}</span>
+                                {{#each element.Messages}}
+                                    {{this}}<br />
+                                {{/each}}
+                            </li>
+                        {{/if}}
+                    {{/each}}
+                    </ul>
+                {{/if}}
+            </div>
+        </div>            
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-success" {{action "onHideDialog"}}>{{controller.language.labelCloseButton}}</a>    
+  </div>
+</div>

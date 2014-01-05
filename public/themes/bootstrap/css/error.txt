@@ -1,0 +1,4 @@
+A less error occured trying to build your bundle. Please paste the error below in an issue for us at http://github.com/twitter/bootstrap! thanks!
+
+
+{"type":"undefined_method","message":"error evaluating function `darken`: Object #<Object> has no method 'toHSL'","filename":"bootstrap.css","index":4516,"line":163,"column":34,"extract":["@navbarBackgroundHighlight:       #ffffff;","@navbarBackground:                darken(@navbarBackgroundHighlight, 5%);","@navbarBorder:                    darken(@navbarBackground, 12%);"]}

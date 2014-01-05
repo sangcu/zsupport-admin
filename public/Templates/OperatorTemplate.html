@@ -1,0 +1,26 @@
+﻿<div>              
+    <div id="left-menu"> 
+        <div class="well sidebar-nav">
+            <ul id="main-nav" class="nav-list">					                    
+                <li class="active nav-header">
+	                {{#linkTo Operator/Queue}}<i class="icon-refresh"></i>{{controller.language.labelNewTicket}}{{/linkTo}} <span class="badge badge-warning">{{controller.totalInQueue}}</span>
+                </li>								
+                <li>
+                    <div class="custom-tickets">
+                            <ul class="nav nav-pills nav-stacked">                       
+                                {{#if inProcess}}
+                                    {{#each ticket in inProcess}}
+                                        <li><a href="#">#{{ticket.ticket}} <span class="badge badge-info">0</span></a></li>
+                                    {{/each}}
+                                {{/if}}                                                                
+                            </ul>
+                    </div>
+                </li>                
+            </ul>
+        </div>       
+    </div>            
+    <div class="right-operator">
+        <!--Body content-->
+        {{outlet content}}         
+    </div>
+</div>

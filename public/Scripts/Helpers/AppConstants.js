@@ -1,0 +1,5 @@
+﻿Support.Me.Constant = {
+    WARN_COLORS: ['#6868FD', '#FD6E68', '#90F171', '#71BEF1', '#F0DA84'],
+    WARN_COLOR_DEFAULT: '#E0E0E0',
+    WARN_TIMER:20000
+};

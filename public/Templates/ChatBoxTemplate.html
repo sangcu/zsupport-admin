@@ -1,0 +1,26 @@
+﻿<div class="widget-chatbox">
+    <div class="widget">						
+		<div class="widget-header">
+			<i class="icon-star"></i>
+			<h3>{{controller.ticketModel.TicketID}}</h3>
+            <a {{action "onClose"}} class="close close-cbox" href="#">&times;</a>
+		</div>
+		<div class="widget-content">						
+            <div class="well">
+                <ul class="chat-content">
+                    {{#each controller.ticketModel.Messages}}
+                        {{#if this.isSupport}}
+                            <li class="supportmsg">{{this.Content}}</li>
+                        {{else}}
+                            <li class="usermsg"><b>{{this.Content}}</b></li>
+                        {{/if}}
+                    {{/each}}
+                </ul>  
+            </div>
+            <div class="input-append">
+                {{view Support.Me.TextFieldInput controllerBinding="controller" valueBinding="controller.newMessage" class="span2" size="16" type="text"}}
+                <button {{action onSentMessage this}} class="btn" type="button">Sent</button>
+            </div>
+		</div>
+	</div>
+</div>    
